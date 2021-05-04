@@ -1,0 +1,58 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.button-container{
+    display:flex;
+    justify-content:center;
+    color:rgba(255, 255, 255, 0.829);
+    background-color:rgb(168, 82, 253);
+    padding: 5px;
+    font-size: 15px;
+    border-radius: 15px;
+    border-color:rgba(204, 153, 255);
+    border-width: 3px;
+    margin-top: 10px;
+    cursor: pointer;
+    -webkit-transition: all 0.5s;
+        -moz-transition: all 0.5s;
+        -o-transition: all 0.5s;
+        transition: all 0.5s;
+}
+
+div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    color:rgba(255, 105, 180, 0.829)
+}
+
+div:nth-child(2) {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    /* margin-top: -20px; */
+}
+
+div:nth-child(3) {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    /* margin-top: -20px; */
+}
+ p {
+     width: fit-content;
+     font-size: 25px;
+     font-family:fantasy;
+     color:rgba(255, 105, 180, 0.829);
+ }
+
+canvas {
+    background: rgb(255, 255, 255);
+    border: 15px double rgba(204, 153, 255, 0.692);
+    /* display:block; */
+    /* margin-left:30%; */
+    
+}
+
