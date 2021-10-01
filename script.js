@@ -10,10 +10,18 @@ const bubbleRowCount = 12
 
 
 const gameState = {
+  currentGame: null,
   userBubble: null,
   gameBubbles: [],
   colors: ["rgb(255,153,153,0.900)", "rgb(153,255,204,0.900)", "rgb(153,204,255,0.900)", "rgb(255,255,153,0.900)"],
   areBubblesDrawn: false,
+  restartGame(){
+    if(this.currentGame) {
+      clearInterval(this.currentGame);
+      this.gameBubbles = [];
+      this.areBubblesDrawn = false;
+    }
+  },
   generateColor() {
     return this.colors[Math.floor(Math.random() * this.colors.length)];
   },
@@ -73,15 +81,16 @@ class Bubble {
   }
 
   countDownToRemove(){
-  setTimeout(this.removeFromGameState , 1000) 
+    setTimeout(this.removeFromGameState, 1000) 
   }
 
 
-  removeFromGameState = ()=> {
-    gameState.gameBubbles.splice(gameState.gameBubbles.indexOf(this), 1);
+  removeFromGameState = () => {
     if(gameState.userBubble == this){
       gameState.userBubble = new UserBubble(250, 425, 20, 1, -3)
+      return;
     } 
+    gameState.gameBubbles.splice(gameState.gameBubbles.indexOf(this), 1);
   }
   
   actionOnCollision(target) {
@@ -92,7 +101,6 @@ class Bubble {
       this.dx = 0; 
       this.dy = 0;
     } else { 
-      console.log('<---')
       this.dx = 0; 
       this.dy = 0;
       gameState.gameBubbles.push(this);
@@ -145,7 +153,7 @@ class UserBubble extends Bubble {
     this.moving = false
     this.dx = dx;
     this.dy = dy;
-    this.speed = 5;
+    this.speed = 10;
   }
 
   shootBubble() {
@@ -176,7 +184,7 @@ class Aimer {
     this.width = 3;
     this.height = 40;
     this.rotation = Math.PI/2;
-    this.rotationSpeed = .01;
+    this.rotationSpeed = .05;
   }
 
   draw(){
@@ -268,10 +276,11 @@ function keyUpHandler(e) {
 window.addEventListener("keydown", keyDownHandler, false);
 window.addEventListener("keyup", keyUpHandler, false);
 
-
 function runGame() {
-  // console.log('anything');
-  setInterval(draw, 30);
+  gameState.restartGame();
+  // blurring start button so hitting spacebar doesn't activate "click" event listener
+  restart.blur();
+  gameState.currentGame = setInterval(draw, 30);
 }
 
 restart.addEventListener("click", runGame);
